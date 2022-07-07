@@ -1,0 +1,14 @@
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: product-service
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka/
+
+server:
+  port: 8081   # HTTP (Tomcat) port

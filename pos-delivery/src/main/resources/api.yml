@@ -1,0 +1,93 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Delivery
+  license:
+    name: MIT
+paths:
+  /delivery/{Id}:
+    get:
+      summary: Info for a specific delivery
+      operationId: showDeliveryById
+      tags:
+        - delivery
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: The id of the item to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+          description: Expected response to a valid request
+
+        default:
+          description: unexpected error
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: double
+        image:
+          type: string
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/Product"
+    Item:
+      type: object
+      required:
+        - product
+        - quantity
+      properties:
+        product:
+          $ref: "#/components/schemas/Product"
+        quantity:
+          type: integer
+    Status:
+      type: string
+      enum:
+        - HALFWAY
+        - FINISHED
+        - PREPARING
+    Delivery:
+      type: object
+      required:
+        - items
+        - status
+        - id
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+        status:
+          $ref: "#/components/schemas/Status"
+        id:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

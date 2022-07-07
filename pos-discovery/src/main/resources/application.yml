@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    hostname: eureka8888.com
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://eureka8889.com:8889/eureka/
+server:
+  port: 8888
+

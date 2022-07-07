@@ -1,0 +1,27 @@
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: order-service
+  cloud:
+    function:
+      definition: checkOrder
+    stream:
+      function:
+        bindings:
+          checkOrder-in-0: receive1
+      bindings:
+        order-declined:
+          destination: order-declined
+        order-approved:
+          destination: order-approved
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8888/eureka/
+eureka:
+  client:
+    enabled: false
+server:
+  port: 8087
